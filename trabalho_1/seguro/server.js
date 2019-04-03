@@ -24,7 +24,7 @@ app.post('/miner/remove', function(req, res) {
 });
 
 app.get('/miner/export', function (req, res) {
-    res.download(`${MINERS_PATH}/${req.query.name}.json`);
+    res.download(`${MINERS_PATH}/${req.query.name}.miner`);
 });
 
 app.post('/miner/import', function (req, res) {

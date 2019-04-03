@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { Miner } = require('./miner');
+const { encrypt, decrypt } = require('./crypto');
 
 const MINERS_PATH = './mineradores';
 
@@ -11,10 +12,10 @@ const createPath = () => {
 
 const serialize = miner => {
     const action = String(miner.startWork).replace(/\r?\n|\r/g, '');
-    return `{ "name": "${ miner.name }", "startWork": "${ action }" }`;
+    return encrypt(`{ "name": "${ miner.name }", "startWork": "${ action }" }`);
 }
 const deserialize = content => {
-    const obj = JSON.parse(content);
+    const obj = JSON.parse(decrypt(content));
     obj.startWork = eval(obj.startWork);
     return obj;
 }
@@ -22,7 +23,7 @@ const deserialize = content => {
 const createMiner = name => {
     const miner = Miner(name);
     createPath();
-    fs.writeFile(`${MINERS_PATH}/${name}.json`, serialize(miner), function(err) {
+    fs.writeFile(`${MINERS_PATH}/${name}.miner`, serialize(miner), function(err) {
         if(err) return console.log(err);
     }); 
     miner.startWork();
@@ -30,7 +31,7 @@ const createMiner = name => {
 
 const removeMiner = name => {
     createPath();
-    fs.unlink(`${MINERS_PATH}/${name}.json`);
+    fs.unlink(`${MINERS_PATH}/${name}.miner`);
 }
 
 
