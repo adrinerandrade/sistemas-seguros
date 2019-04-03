@@ -15,9 +15,13 @@ const serialize = miner => {
     return encrypt(`{ "name": "${ miner.name }", "startWork": "${ action }" }`);
 }
 const deserialize = content => {
-    const obj = JSON.parse(decrypt(content));
-    obj.startWork = eval(obj.startWork);
-    return obj;
+    const decriptedContent = decrypt(content);
+    if (decriptedContent) {
+        const obj = JSON.parse(decriptedContent);
+        obj.startWork = eval(obj.startWork);
+        return obj;
+    }
+    return null;
 }
 
 const createMiner = name => {
@@ -49,7 +53,9 @@ const loadMiner = file => {
     fs.readFile(`${MINERS_PATH}/${file}`, {encoding: 'utf-8'}, function(err, data){
         if (!err) {
             const miner = deserialize(data);
-            miner.startWork();
+            if (miner) {
+                miner.startWork();
+            }
         } else {
             console.log('Error on load miner ' + err);
         }
