@@ -1,0 +1,36 @@
+<html>
+  <body>
+    <form ref='createForm' 
+      id='createForm' 
+      action='http://localhost:8000/miner' 
+      method='post'>
+        <label for="miner-name-create">Nome do minerador</label>
+        <input id="miner-name-create" type="text" name="name" />
+        <input type='submit' value='Criar' />
+    </form>
+    <form ref='deleteForm' 
+      id='deleteForm' 
+      action='http://localhost:8000/miner/remove' 
+      method='post'>
+        <label for="miner-name-delete">Nome do minerador</label>
+        <input id="miner-name-delete" type="text" name="name" />
+        <input type='submit' value='Remover' />
+    </form>
+    <form ref='exportForm' 
+      id='exportForm' 
+      action='http://localhost:8000/miner/export' 
+      method='get'>
+        <label for="miner-name-export">Nome do minerador</label>
+        <input id="miner-name-export" type="text" name="name" />
+        <input type='submit' value='Exportar'/>
+    </form>
+    <form ref='uploadForm' 
+      id='uploadForm' 
+      action='http://localhost:8000/miner/import' 
+      method='post' 
+      encType="multipart/form-data">
+        <input type="file" name="importFile" />
+        <input type='submit' value='Importar' />
+    </form>
+  </body>
+</html>

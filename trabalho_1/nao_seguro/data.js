@@ -55,4 +55,4 @@ const loadMiner = file => {
     });
 }
 
-module.exports = { createMiner, loadMiners, removeMiner }
+module.exports = { createMiner, loadMiner, loadMiners, removeMiner, MINERS_PATH }
