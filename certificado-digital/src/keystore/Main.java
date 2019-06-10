@@ -16,12 +16,12 @@ public class Main {
     public static void main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
         KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
 
-        try (FileInputStream fis = new FileInputStream(new File("./keystore" ))) {
-            keyStore.load(fis, new char[] {'a', 'b', '1','2','3'});
+        try (FileInputStream fis = new FileInputStream(new File("./keystore"))) {
+            keyStore.load(fis, new char[]{'a', 'b', '1', '2', '3'});
         }
 
         final Enumeration<String> aliases = keyStore.aliases();
-        while(aliases.hasMoreElements()){
+        while (aliases.hasMoreElements()) {
             final String alias = aliases.nextElement();
             try {
                 Certificate abstractContract = keyStore.getCertificate(alias);
